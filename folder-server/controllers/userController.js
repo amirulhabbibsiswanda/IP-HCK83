@@ -20,8 +20,8 @@ class UserController {
                 favouriteRole: user.favouriteRole
             })
         } catch (error) {
-            console.log(error, error.message, "ini error dan message");
-
+            // console.log(error, error.message, "ini error dan message");
+            next(error)
         }
     }
 }
