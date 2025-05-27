@@ -14,9 +14,14 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique: true
       },
       password: {
         type: Sequelize.STRING
+      },
+      userStatus: {
+        type: Sequelize.STRING,
+        defaultValue: "CUSTOMER"
       },
       mobileLegendsRank: {
         type: Sequelize.STRING,

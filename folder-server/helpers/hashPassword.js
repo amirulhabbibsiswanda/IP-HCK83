@@ -7,7 +7,9 @@ async function hashPassword(password) {
     const saltRounds = 3;
 
     try {
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const salt = await bcrypt.genSalt(saltRounds);
+        // 2. Hash kata sandi menggunakan salt yang sudah digenerate
+        const hashedPassword = await bcrypt.hash(password, salt);
         return hashedPassword;
     } catch (error) {
         console.error('Error hashing password:', error);

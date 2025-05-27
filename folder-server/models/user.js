@@ -45,7 +45,8 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: {
           msg: "input must be email formatted"
         }
-      }
+      },
+      unique: true
     },
     password: {
       type: DataTypes.STRING,
@@ -58,6 +59,10 @@ module.exports = (sequelize, DataTypes) => {
           msg: "password is required"
         }
       }
+    },
+    userStatus: {
+      type: DataTypes.STRING,
+      defaultValue: "CUSTOMER"
     },
     mobileLegendsRank: {
       type: DataTypes.STRING,
