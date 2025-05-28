@@ -72,7 +72,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: "epic"
     },
 
-    favouriteRole: DataTypes.STRING
+    favouriteRole: {
+      type: DataTypes.STRING,
+      defaultValue: "Tank"
+    }
   }, {
     sequelize,
     modelName: 'User',

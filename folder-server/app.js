@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const express = require('express')
 const UserController = require('./controllers/userController')
 const errorHandling = require('./middlewares/errorHandling')
@@ -15,8 +17,9 @@ const upload = multer({ storage: storage })
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-app.post("/register", UserController.register)
-app.post("/login", UserController.login)
+app.post("/users/register", UserController.register)
+app.post("/users/login", UserController.login)
+app.post("/users/login-google", UserController.googleLogin)
 
 app.get("/heroes", HeroController.heroes)
 app.use(authentication)

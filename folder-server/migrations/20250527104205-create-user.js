@@ -28,7 +28,8 @@ module.exports = {
         defaultValue: "epic"
       },
       favouriteRole: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: "Tank"
       },
       createdAt: {
         allowNull: false,
