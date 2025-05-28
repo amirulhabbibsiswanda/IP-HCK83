@@ -74,7 +74,7 @@ class UserController {
 
     static async googleLogin(req, res, next) {
         try {
-            const { id_token } = req.body;
+            const { id_token, mobileLegendsRank, favouriteRole } = req.body;
             const ticket = await client.verifyIdToken({
                 idToken: id_token,
                 audience: process.env.GOOGLE_CLIENT_ID,
@@ -88,10 +88,14 @@ class UserController {
             // Jika user belum ada, buat user baru
             if (!user) {
                 user = await User.create({
-                    username: payload.name,
+                    username: payload.name || "Google User",
                     email: payload.email,
                     password: Math.random().toString(36).slice(-8), // Password random
+                    mobileLegendsRank: mobileLegendsRank || "epic",
+                    favouriteRole: favouriteRole || "Tank",
+                    userStatus: "customer"
                 });
+                console.log("New user created:", user.email);
             }
 
             const access_token = generateToken({
@@ -102,30 +106,9 @@ class UserController {
 
             // Kirim response
             res.status(200).json({ access_token });
-            // const { id_token } = req.body;
-            // // console.log(id_token);
-            // // console.log(process.env.GOOGLE_CLIENT_ID);
-
-
-            // const ticket = await client.verifyIdToken({
-            //     idToken: id_token,
-            //     audience:
-            //         process.env.GOOGLE_CLIENT_ID,
-            // });
-            // console.log(ticket);
-
-
-            // const payload = ticket.getPayload();
-            // console.log(payload, "ini payload di gugle login");
-
-            // // const user = await User.findOne({ where: { email: payload.email } });
-            // // let newUser;
-
         } catch (error) {
-            console.log(error);
-            console.log(error.name);
-
-            next(error)
+            console.log("Google login error:", error);
+            next(error);
         }
     }
 }

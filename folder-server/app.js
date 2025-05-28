@@ -13,7 +13,9 @@ const UserFavouriteHeroController = require('./controllers/userFavouriteHeroCont
 const GenerateController = require('./controllers/generateController')
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
+const cors = require("cors")
 
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
