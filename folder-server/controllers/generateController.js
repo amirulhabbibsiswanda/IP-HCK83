@@ -1,29 +1,30 @@
 const axios = require("axios");
 const { generateContent } = require("../helpers/generateAI");
-
+const { Hero } = require("../models/index")
 
 class GenerateController {
     static async generateTopHero(req, res, next) {
         try {
             // const { role } = req.query
             // 1. Fetch semua hero dari API Dazelpro
-            const { data } = await axios.get("https://api.dazelpro.com/mobile-legends/hero");
-            const heroes = data.hero;
+            // const { data } = await axios.get("https://api.dazelpro.com/mobile-legends/hero");
+            // const heroes = data.hero;
+            const heroes = await Hero.findAll()
+            // console.log(heroes, "INI HERO DI MAP");
 
             // 2. Hitung total overview score per hero
             const heroesWithScore = heroes.map(hero => {
-                console.log(hero, "INI HERO DI MAP");
 
-                const overview = hero.hero_overview;
+                // const overview = hero.hero_overview;
                 const total =
-                    (Number(overview.durability) || 0) +
-                    (Number(overview.offence) || 0) +
-                    (Number(overview.ability) || 0) +
-                    (Number(overview.difficulty) || 0);
+                    (Number(hero.durability) || 0) +
+                    (Number(hero.offence) || 0) +
+                    (Number(hero.ability) || 0) +
+                    (Number(hero.difficulty) || 0);
 
                 return {
-                    name: hero.hero_name,
-                    role: hero.hero_role,
+                    name: hero.name,
+                    role: hero.role,
                     total,
                 };
             });
@@ -35,7 +36,7 @@ User likes hero role: ${req.user.favouriteRole}
 Here are some heroes with their roles and total overview score:
 ${heroesWithScore.map(h => `- ${h.name} (${h.role}) Score: ${h.total}`).join("\n")}
 
-Recommend top 5 heroes that match the user's favorite role (${req.user.favoriteRole}) and have the highest score.
+Recommend top 5 heroes that match the user's favorite role (${req.user.favouriteRole}) and have the highest score.
 
 Respond with a JSON array of hero names only.
         `;
@@ -45,17 +46,20 @@ Respond with a JSON array of hero names only.
             const heroNames = JSON.parse(generation);
 
             // 5. Ambil detail hero yang cocok
-            const recommendedHeroes = heroes.filter(h => heroNames.includes(h.hero_name));
+            const recommendedHeroes = heroes.filter(h => heroNames.includes(h.name));
 
             res.json({
-                user: req.user,
+                user: {
+                    username: req.user.username,
+                    fovouriteRole: req.user.favouriteRole
+                },
                 recommendations: heroNames,
                 heroes: recommendedHeroes,
             });
 
         } catch (error) {
             console.error(error, "ini eror di generate controller");
-            res.status(500).json({ message: "Failed to get hero recommendations." });
+            res.status(503).json({ message: "Failed to get hero recommendations." });
 
         }
     }
