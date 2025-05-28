@@ -8,6 +8,7 @@ const port = 3000
 const isAdmin = require('./middlewares/isAdmin')
 const multer = require('multer')
 const UserFavouriteHeroController = require('./controllers/userFavouriteHeroController')
+const GenerateController = require('./controllers/generateController')
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 
@@ -24,6 +25,8 @@ app.put("/heroes/:id", isAdmin, HeroController.putHeroById)
 app.patch("/heroes/:id/image-url", isAdmin, upload.single("image"), HeroController.updateImageById)
 app.post("/heros/:heroId", UserFavouriteHeroController.addToFavourite)
 app.delete("/heros/:heroId", UserFavouriteHeroController.deleteFavouriteHero)
+
+app.get("/generate-ai", GenerateController.generateTopHero)
 
 
 app.use(errorHandling)
