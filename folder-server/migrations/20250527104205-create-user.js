@@ -21,11 +21,11 @@ module.exports = {
       },
       userStatus: {
         type: Sequelize.STRING,
-        defaultValue: "CUSTOMER"
+        defaultValue: "customer"
       },
       mobileLegendsRank: {
         type: Sequelize.STRING,
-        defaultValue: "EPIC"
+        defaultValue: "epic"
       },
       favouriteRole: {
         type: Sequelize.STRING

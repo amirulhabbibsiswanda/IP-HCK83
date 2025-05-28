@@ -65,11 +65,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     userStatus: {
       type: DataTypes.STRING,
-      defaultValue: "CUSTOMER"
+      defaultValue: "customer"
     },
     mobileLegendsRank: {
       type: DataTypes.STRING,
-      defaultValue: "EPIC"
+      defaultValue: "epic"
     },
 
     favouriteRole: DataTypes.STRING
