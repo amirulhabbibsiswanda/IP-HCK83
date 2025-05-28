@@ -1,7 +1,7 @@
 
 function isAdmin(req, res, next) {
     try {
-        console.log(req.user, "ini di is admin");
+        // console.log(req.user, "ini di is admin");
 
         if (req.user.userStatus !== "admin") {
             throw { name: "wrongRole" }

@@ -7,6 +7,7 @@ const app = express()
 const port = 3000
 const isAdmin = require('./middlewares/isAdmin')
 const multer = require('multer')
+const UserFavouriteHeroController = require('./controllers/userFavouriteHeroController')
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 
@@ -21,6 +22,8 @@ app.use(authentication)
 app.get("/heroes/:id", HeroController.heroDetail)
 app.put("/heroes/:id", isAdmin, HeroController.putHeroById)
 app.patch("/heroes/:id/image-url", isAdmin, upload.single("image"), HeroController.updateImageById)
+app.post("/heros/:heroId", UserFavouriteHeroController.addToFavourite)
+app.delete("/heros/:heroId", UserFavouriteHeroController.deleteFavouriteHero)
 
 
 app.use(errorHandling)

@@ -15,8 +15,9 @@ function errorHandling(error, req, res, next) {
         res.status(403).json({ message: "error / invalid token" })
     } else if (error.name === "wrongRole") {
         res.status(403).json({ message: "forbidden access, only admin can change hero data" })
+    } else if (error.name === "cannotFindImageSource") {
+        res.status(400).json({ message: "cannot find image source" })
     }
-
 
 
     else {
