@@ -2,8 +2,13 @@ const express = require('express')
 const UserController = require('./controllers/userController')
 const errorHandling = require('./middlewares/errorHandling')
 const HeroController = require('./controllers/heroController')
+const authentication = require('./middlewares/authentication')
 const app = express()
 const port = 3000
+const isAdmin = require('./middlewares/isAdmin')
+const multer = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -12,8 +17,11 @@ app.post("/register", UserController.register)
 app.post("/login", UserController.login)
 
 app.get("/heroes", HeroController.heroes)
+app.use(authentication)
 app.get("/heroes/:id", HeroController.heroDetail)
-app.put("/heroes/:id", HeroController.putHeroById)
+app.put("/heroes/:id", isAdmin, HeroController.putHeroById)
+app.patch("/heroes/:id/image-url", isAdmin, upload.single("image"), HeroController.updateImageById)
+
 
 app.use(errorHandling)
 

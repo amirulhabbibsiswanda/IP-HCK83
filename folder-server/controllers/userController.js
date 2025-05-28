@@ -29,7 +29,7 @@ class UserController {
 
     static async login(req, res, next) {
         try {
-            console.log(req.headers, "ini headers");
+            // console.log(req.headers, "ini headers");
 
             let { email, password } = req.body
             if (!email) {

@@ -16,7 +16,9 @@ async function authentication(req, res, next) {
         if (!user) {
             throw { name: "JsonWebTokenError" }
         }
+
         req.user = user
+        // console.log(req.user.userStatus, "ini req user di auth");
 
         next()
     } catch (error) {
