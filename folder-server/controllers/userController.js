@@ -1,4 +1,5 @@
-require("dotenv").config()
+require('dotenv').config()
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const { comparePassword } = require("../helpers/hashPassword")
 const { generateToken, verifyToken } = require("../helpers/jwt")
 const { User, Hero } = require("../models/index")
@@ -129,6 +130,66 @@ class UserController {
             next(error);
         }
     }
+
+    static async upgradeStatus(req, res, next) {
+        try {
+            const user = await User.findByPk(req.user.id);
+
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                line_items: [
+                    {
+                        price_data: {
+                            currency: 'idr',
+                            product_data: {
+                                name: 'Upgrade to Admin',
+                                description: `User: ${user.email}`,
+                            },
+                            unit_amount: 100_000 * 100, // 100.000 IDR
+                        },
+                        quantity: 1,
+                    },
+                ],
+                mode: 'payment',
+                success_url: `http://localhost:5173/upgrade-success?session_id={CHECKOUT_SESSION_ID}`,
+                cancel_url: `http://localhost:5173/`,
+            });
+
+            res.status(200).json({ url: session.url });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // Controller
+    static async changeStatusFromStripeSession(req, res, next) {
+        try {
+            const { session_id } = req.query;
+            if (!session_id) {
+                throw { name: "InvalidSession" };
+            }
+
+            const session = await stripe.checkout.sessions.retrieve(session_id);
+            
+            // Gunakan ID user dari token autentikasi
+            const userId = req.user.id;
+            
+            const [updated] = await User.update(
+                { userStatus: "admin" },
+                { where: { id: userId } }
+            );
+
+            if (updated === 0) {
+                throw { name: "UserNotFound" };
+            }
+
+            res.status(200).json({ message: "User upgraded to admin via Stripe session" });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+
 }
 
 module.exports = UserController

@@ -9,6 +9,7 @@ import HeroEdit from "./pages/HeroEdit";
 import FavouriteHero from "./pages/FavouriteHero";
 import ImageUplaod from "./pages/ImageUpload";
 import Recommendations from "./pages/Recommendations";
+import UpgradeSuccessPage from "./pages/UpgradeSuccessPage";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path={"/register"} element={<Register />} />
         <Route path={"/login"} element={<Login />} />
+        <Route path={"/upgrade-success"} element={<UpgradeSuccessPage />} />
 
         <Route element={<MainLayout />}>
           <Route path={"/"} element={<Home />} />
@@ -25,7 +27,6 @@ function App() {
           <Route path={"/users/favourites"} element={<FavouriteHero />} />
           <Route path={"/image/upload/:id"} element={<ImageUplaod />} />
           <Route path={"/recommendations"} element={<Recommendations />} />
-
         </Route>
       </Routes>
     </BrowserRouter>

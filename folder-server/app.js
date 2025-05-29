@@ -29,8 +29,14 @@ app.get("/heroes/:id", HeroController.heroDetail)
 app.put("/heroes/:id", isAdmin, HeroController.putHeroById)
 app.patch("/heroes/image-url/:id", isAdmin, upload.single("image"), HeroController.updateImageById)
 app.post("/heroes/:heroId", UserFavouriteHeroController.addToFavourite)
-app.get("/users/favourites", UserController.getUserFavouriteHero)
 app.delete("/heroes/:heroId", UserFavouriteHeroController.deleteFavouriteHero)
+app.delete("/heroes/:heroId", UserFavouriteHeroController.deleteFavouriteHero)
+app.get("/users/favourites", UserController.getUserFavouriteHero)
+app.get("/users/upgrade", UserController.upgradeStatus)
+// app.patch("/users/upgrade", UserController.changeStatus)
+app.patch("/users/upgrade-success", UserController.changeStatusFromStripeSession);
+
+
 
 app.get("/generate-ai", GenerateController.generateTopHero)
 
