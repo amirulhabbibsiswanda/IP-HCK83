@@ -8,6 +8,7 @@ import HeroDetail from "./pages/HeroDetail";
 import HeroEdit from "./pages/HeroEdit";
 import FavouriteHero from "./pages/FavouriteHero";
 import ImageUplaod from "./pages/ImageUpload";
+import Recommendations from "./pages/Recommendations";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path={"/heroes/edit/:id"} element={<HeroEdit />} />
           <Route path={"/users/favourites"} element={<FavouriteHero />} />
           <Route path={"/image/upload/:id"} element={<ImageUplaod />} />
+          <Route path={"/recommendations"} element={<Recommendations />} />
 
         </Route>
       </Routes>

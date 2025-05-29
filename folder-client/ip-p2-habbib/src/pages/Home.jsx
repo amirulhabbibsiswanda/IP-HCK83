@@ -47,7 +47,6 @@ export default function Home() {
 
     return (
         <div>
-            <a onClick={() => { navigate("/users/favourites") }} className="btn btn-primary"> ke favorit</a>
 
             <div className="d-flex flex-wrap gap-3">
                 {
