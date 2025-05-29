@@ -23,16 +23,16 @@ app.post("/users/register", UserController.register)
 app.post("/users/login", UserController.login)
 app.post("/users/login-google", UserController.googleLogin)
 
-app.get("/heroes", HeroController.heroes)
 app.use(authentication)
+app.get("/", HeroController.heroes)
 app.get("/heroes/:id", HeroController.heroDetail)
 app.put("/heroes/:id", isAdmin, HeroController.putHeroById)
 app.patch("/heroes/:id/image-url", isAdmin, upload.single("image"), HeroController.updateImageById)
-app.post("/heros/:heroId", UserFavouriteHeroController.addToFavourite)
-app.delete("/heros/:heroId", UserFavouriteHeroController.deleteFavouriteHero)
+app.post("/heroes/:heroId", UserFavouriteHeroController.addToFavourite)
+app.get("/users/favourites", UserController.getUserFavouriteHero)
+app.delete("/heroes/:heroId", UserFavouriteHeroController.deleteFavouriteHero)
 
 app.get("/generate-ai", GenerateController.generateTopHero)
-
 
 app.use(errorHandling)
 

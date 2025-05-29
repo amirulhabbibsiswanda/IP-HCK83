@@ -1,7 +1,7 @@
 require("dotenv").config()
 const { comparePassword } = require("../helpers/hashPassword")
 const { generateToken, verifyToken } = require("../helpers/jwt")
-const { User } = require("../models/index")
+const { User, Hero } = require("../models/index")
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client();
 
@@ -108,6 +108,24 @@ class UserController {
             res.status(200).json({ access_token });
         } catch (error) {
             console.log("Google login error:", error);
+            next(error);
+        }
+    }
+
+    static async getUserFavouriteHero(req, res, next) {
+        try {
+            const userId = req.user.id; // Diambil dari JWT via authentication middleware
+
+            const user = await User.findByPk(userId, {
+                include: {
+                    model: Hero,
+                    through: { attributes: [] } // opsional: tidak menampilkan kolom dari tabel junction
+                }
+            });
+
+            // console.log(user.Heros, 'ini usernya');
+            res.status(200).json(user.Heros); // karena relasi many-to-many
+        } catch (error) {
             next(error);
         }
     }
