@@ -6,7 +6,7 @@ const errorHandling = require('./middlewares/errorHandling')
 const HeroController = require('./controllers/heroController')
 const authentication = require('./middlewares/authentication')
 const app = express()
-const port = 3000
+// const port = 3000 // Komentar atau hapus ini
 const isAdmin = require('./middlewares/isAdmin')
 const multer = require('multer')
 const UserFavouriteHeroController = require('./controllers/userFavouriteHeroController')
@@ -42,6 +42,10 @@ app.get("/generate-ai", GenerateController.generateTopHero)
 
 app.use(errorHandling)
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-});
+// Hapus atau komentar bagian ini
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`)
+// });
+
+// Tambahkan export app
+module.exports = app;
