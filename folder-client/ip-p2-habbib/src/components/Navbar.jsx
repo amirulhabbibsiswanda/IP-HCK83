@@ -20,13 +20,33 @@ export default function Navbar() {
     };
 
     return (
-        <div className="bg-dark py-2 px-3 d-flex gap-2">
-            <a onClick={() => { navigate("/") }} className="btn btn-outline-light" >Heroes</a>
-            <a onClick={() => { navigate("/users/favourites") }} className="btn btn-outline-light">My Favourite Heroes</a>
-            <a onClick={() => { navigate("/recommendations") }} className="btn btn-outline-light">Hero Recommendations</a>
-            <a onClick={handleUpgrade} className="btn btn-outline-light">Upgrade Status</a>
-            <a onClick={() => { navigate(-1) }} className="btn btn-outline-light">Back</a>
-            <a onClick={handleLogout} className="btn btn-outline-light">Logout</a>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-gradient" style={{ background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 100%)' }}>
+            <div className="container-fluid">
+                <span className="navbar-brand fw-bold">Hero Collection</span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <a onClick={() => { navigate("/") }} className="nav-link active">Heroes</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick={() => { navigate("/users/favourites") }} className="nav-link">My Favourites</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick={() => { navigate("/recommendations") }} className="nav-link">Hero Recommendations</a>
+                        </li>
+                        <li className="nav-item">
+                            <a onClick={() => { navigate(-1) }} className="nav-link">Back</a>
+                        </li>
+                    </ul>
+                    <div className="d-flex">
+                        <button onClick={handleUpgrade} className="btn btn-outline-info me-2">Upgrade Status</button>
+                        <button onClick={handleLogout} className="btn btn-outline-danger">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
     )
 }

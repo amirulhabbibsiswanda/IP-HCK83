@@ -19,44 +19,63 @@ export default function Login() {
     };
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title text-center mb-4">Login</h2>
-                            {error && <div className="alert alert-danger">{error}</div>}
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <label htmlFor="email" className="form-label">Email</label>
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        id="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
+        <div className="min-vh-100 d-flex align-items-center justify-content-center" style={{ backgroundImage: 'url(https://wallpapercave.com/wp/wp9311879.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div className="container py-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-5">
+                        <div className="card shadow-lg border-0" style={{ backgroundColor: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(10px)' }}>
+                            <div className="card-body p-4 p-md-5">
+                                <div className="text-center mb-4">
+                                    <h2 className="fw-bold text-info mb-2">Welcome Back</h2>
+                                    <p className="text-light-emphasis">Sign in to continue to Hero Collection</p>
                                 </div>
-                                <div className="mb-3">
-                                    <label htmlFor="password" className="form-label">Password</label>
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        id="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                    />
+                                
+                                {error && <div className="alert alert-danger">{error}</div>}
+                                
+                                <form onSubmit={handleSubmit}>
+                                    <div className="mb-4">
+                                        <label htmlFor="email" className="form-label text-light">Email Address</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text bg-transparent text-light border-end-0">
+                                                <i className="bi bi-envelope"></i>
+                                            </span>
+                                            <input
+                                                type="email"
+                                                className="form-control bg-transparent text-light border-start-0"
+                                                id="email"
+                                                placeholder="Enter your email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="password" className="form-label text-light">Password</label>
+                                        <div className="input-group">
+                                            <span className="input-group-text bg-transparent text-light border-end-0">
+                                                <i className="bi bi-lock"></i>
+                                            </span>
+                                            <input
+                                                type="password"
+                                                className="form-control bg-transparent text-light border-start-0"
+                                                id="password"
+                                                placeholder="Enter your password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="d-grid mb-4">
+                                        <button type="submit" className="btn btn-primary py-2 fw-bold" disabled={loading}>
+                                            {loading ? <><span className="spinner-border spinner-border-sm me-2"></span>Loading...</> : "Sign In"}
+                                        </button>
+                                    </div>
+                                </form>
+                                <div className="text-center">
+                                    <p className="text-light-emphasis">Don't have an account? <a onClick={() => navigate("/register")} className="text-info fw-bold">Register</a></p>
                                 </div>
-                                <div className="d-grid">
-                                    <button type="submit" className="btn btn-primary" disabled={loading}>
-                                        {loading ? "Loading..." : "Login"}
-                                    </button>
-                                </div>
-                            </form>
-                            <div className="text-center mt-3">
-                                <p>Don't have an account? <a onClick={() => navigate("/register")}>Register</a></p>
                             </div>
                         </div>
                     </div>

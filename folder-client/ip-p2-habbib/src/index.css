@@ -60,3 +60,53 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Tambahkan di bagian bawah file CSS yang sudah ada */
+
+.hover-scale:hover {
+    transform: scale(1.03) !important;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.text-light-emphasis {
+    color: #94a3b8;
+}
+
+.bg-gradient {
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Styling untuk loading spinner */
+.spinner-border {
+    border-width: 0.15em;
+}
+
+/* Styling untuk input fields */
+.form-control:focus {
+    background-color: rgba(15, 23, 42, 0.7);
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25);
+}
+
+/* Styling untuk buttons */
+.btn {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Card hover effects */
+.card {
+    overflow: hidden;
+}
+
+.card img {
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
