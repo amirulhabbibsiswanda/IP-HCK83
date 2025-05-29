@@ -1,79 +1,67 @@
-import { useState } from "react"
-import axiosInstance from "../lib/http"
-import { NavLink, useNavigate } from "react-router";
-import SubmitButton from "../components/SubmitButton";
-import GoogleLoginButton from "./GoogleLoginButton";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/features/authSlice";
 
 export default function Login() {
-    const navigate = useNavigate()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { loading, error } = useSelector((state) => state.auth);
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
-
-    async function postLogin(e) {
-        e.preventDefault()
-        try {
-            const { data } = await axiosInstance.post("/users/login",
-                {
-                    email, password
-                }
-            )
-            // console.log(data);
-            localStorage.setItem("access_token", data.access_token)
-
-            navigate("/")
-        } catch (error) {
-            console.log(error);
-            console.log(error.message);
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const result = await dispatch(login({ email, password }));
+        if (login.fulfilled.match(result)) {
+            navigate("/");
         }
-    }
+    };
 
     return (
-
-        <div className="container mt-5 p-4 rounded bg-dark shadow-lg" style={{ maxWidth: '500px' }}>
-
-
-            <form onSubmit={postLogin}>
-
-                <div className="form-group">
-                    <label htmlFor="">Email address</label>
-                    <input
-                        value={email}
-                        onChange={(e) => { setEmail(e.target.value) }}
-                        type="email"
-                        className="form-control"
-                        id=""
-                        aria-describedby="emailHelp"
-                        placeholder="Enter email"
-                    />
-
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card">
+                        <div className="card-body">
+                            <h2 className="card-title text-center mb-4">Login</h2>
+                            {error && <div className="alert alert-danger">{error}</div>}
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email</label>
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        id="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        id="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="d-grid">
+                                    <button type="submit" className="btn btn-primary" disabled={loading}>
+                                        {loading ? "Loading..." : "Login"}
+                                    </button>
+                                </div>
+                            </form>
+                            <div className="text-center mt-3">
+                                <p>Don't have an account? <a onClick={() => navigate("/register")}>Register</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="">Password</label>
-                    <input
-                        value={password}
-                        onChange={(e) => { setPassword(e.target.value) }}
-                        type="password"
-                        className="form-control"
-                        id=""
-                        placeholder=""
-                    />
-                </div>
-
-
-                <SubmitButton />
-                <p>Don't have any account? <NavLink to={"/register"}>register</NavLink></p>
-
-            </form>
-            <div>
-                <h2>Login</h2>
-                {/* Google Login Button */}
-                <GoogleLoginButton />
             </div>
         </div>
-
-
-    )
+    );
 }

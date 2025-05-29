@@ -3,51 +3,27 @@ import axiosInstance from "../lib/http";
 import { useEffect } from "react";
 import Card from "../components/Card";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHeroes, addToFavourite } from "../redux/features/heroesSlice";
 
 export default function Home() {
-    const [heroes, setHeroes] = useState([])
-    const navigate = useNavigate()
-
-    async function fetchHeroes() {
-        try {
-            const { data } = await axiosInstance.get("/",
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("access_token")}`
-                    }
-                }
-            )
-            // console.log(data);
-            setHeroes(data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { heroes, loading, error } = useSelector((state) => state.heroes);
 
     useEffect(() => {
-        fetchHeroes()
-    }, [])
+        dispatch(fetchHeroes());
+    }, [dispatch]);
 
-    async function addToFavourite(heroId) {
-        try {
-            await axiosInstance.post(`/heroes/${heroId}`, {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("access_token")}`
-                    }
-                }
-            )
-            fetchHeroes()
-        } catch (error) {
-            console.log(error);
+    const handleAddToFavourite = (heroId) => {
+        dispatch(addToFavourite(heroId));
+    };
 
-        }
-    }
-
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <div>
-
             <div className="d-flex flex-wrap gap-3">
                 {
                     heroes.map((hero) => {
@@ -57,11 +33,10 @@ export default function Home() {
                                 <a onClick={() => { navigate(`/heroes/${hero.id}`) }} className="btn btn-primary">
                                     detail
                                 </a>
-                                <a onClick={(e) => { e.preventDefault(); addToFavourite(hero.id) }} className="btn btn-primary">
+                                <a onClick={(e) => { e.preventDefault(); handleAddToFavourite(hero.id) }} className="btn btn-primary">
                                     add to favourite
                                 </a>
                             </div>
-
                         )
                     })
                 }
