@@ -15,10 +15,9 @@ beforeAll(async () => {
       username: "IlhamSanin",
       email: "IlhamSanin@gmail.com",
       password: await hashPassword("IlhamSanin123"),
-      role: "Admin",
-      phoneNumber: "0917672533",
-      address: "Jawa",
       userStatus: "admin",
+      mobileLegendsRank: "Mythic",
+      favouriteRole: "Tank",
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -91,7 +90,7 @@ describe("POST /users/login", function () {
     const response = await request(app).post("/users/login").send(user);
 
     expect(response.status).toBe(404);
-    expect(response.body).toHaveProperty("message", "error data not found");
+    expect(response.body).toHaveProperty("message", "email not found");
   });
 
   it("Password diberikan salah / tidak match", async function () {
@@ -101,7 +100,7 @@ describe("POST /users/login", function () {
     };
     const response = await request(app).post("/users/login").send(user);
 
-    expect(response.status).toBe(401);
-    expect(response.body).toHaveProperty("message", "password is incorrect");
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "incorrect password");
   });
 });

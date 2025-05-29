@@ -170,10 +170,10 @@ class UserController {
             }
 
             const session = await stripe.checkout.sessions.retrieve(session_id);
-            
+
             // Gunakan ID user dari token autentikasi
             const userId = req.user.id;
-            
+
             const [updated] = await User.update(
                 { userStatus: "admin" },
                 { where: { id: userId } }

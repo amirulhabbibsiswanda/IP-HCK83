@@ -96,7 +96,8 @@ describe("POST /heroes/:heroId (Add to Favourite)", function () {
       .post("/heroes/999999")
       .set("Authorization", `Bearer ${access_token}`);
     
-    expect(response.status).toBe(500); // Tergantung implementasi error handling
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty("message", "hero data/id not found");
   });
 });
 
