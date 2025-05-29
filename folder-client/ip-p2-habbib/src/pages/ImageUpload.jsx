@@ -38,7 +38,7 @@ export default function ImageUpload() {
 
     return (
 
-        <div className='bg-yellow-50'>
+        <div className="container bg-dark text-light rounded p-4 mt-4">
 
             <div className="flex flex-col items-center justify-center min-h-[40vh]  px-4 mt-6">
                 <h2 className="text-lg font-semibold text-yellow-700 mb-4">

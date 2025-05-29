@@ -43,7 +43,9 @@ export default function Recommendations() {
             <h3 className="mt-4">Top 5 Recommended Heroes (Names)</h3>
             <ul className="list-group mb-4">
                 {recommendations.map((name, idx) => (
-                    <li key={idx} className="list-group-item">{name}</li>
+                    <li key={idx} className="list-group-item bg-dark text-light">
+                        <span className="badge bg-primary me-2">{idx + 1}</span>{name}
+                    </li>
                 ))}
             </ul>
 

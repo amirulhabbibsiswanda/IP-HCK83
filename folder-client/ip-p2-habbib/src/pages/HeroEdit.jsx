@@ -67,7 +67,8 @@ export default function HeroEdit() {
     }
 
     return (
-        <div>
+        <div className="card bg-dark text-white p-4 mt-4 shadow" style={{ maxWidth: '600px', margin: 'auto' }}>
+
             <form onSubmit={submitEdit}>
                 <div className="form-group">
                     <label htmlFor="">Hero Name</label>

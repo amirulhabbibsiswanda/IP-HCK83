@@ -2,6 +2,7 @@ import { useState } from "react"
 import axiosInstance from "../lib/http"
 import { NavLink, useNavigate } from "react-router";
 import SubmitButton from "../components/SubmitButton";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 export default function Login() {
     const navigate = useNavigate()
@@ -30,38 +31,49 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={postLogin}>
 
-            <div className="form-group">
-                <label htmlFor="">Email address</label>
-                <input
-                    value={email}
-                    onChange={(e) => { setEmail(e.target.value) }}
-                    type="email"
-                    className="form-control"
-                    id=""
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                />
+        <div className="container mt-5 p-4 rounded bg-dark shadow-lg" style={{ maxWidth: '500px' }}>
 
+
+            <form onSubmit={postLogin}>
+
+                <div className="form-group">
+                    <label htmlFor="">Email address</label>
+                    <input
+                        value={email}
+                        onChange={(e) => { setEmail(e.target.value) }}
+                        type="email"
+                        className="form-control"
+                        id=""
+                        aria-describedby="emailHelp"
+                        placeholder="Enter email"
+                    />
+
+                </div>
+                <div className="form-group">
+                    <label htmlFor="">Password</label>
+                    <input
+                        value={password}
+                        onChange={(e) => { setPassword(e.target.value) }}
+                        type="password"
+                        className="form-control"
+                        id=""
+                        placeholder=""
+                    />
+                </div>
+
+
+                <SubmitButton />
+                <p>Don't have any account? <NavLink to={"/register"}>register</NavLink></p>
+
+            </form>
+            <div>
+                <h2>Login</h2>
+                {/* Google Login Button */}
+                <GoogleLoginButton />
             </div>
-            <div className="form-group">
-                <label htmlFor="">Password</label>
-                <input
-                    value={password}
-                    onChange={(e) => { setPassword(e.target.value) }}
-                    type="password"
-                    className="form-control"
-                    id=""
-                    placeholder=""
-                />
-            </div>
+        </div>
 
-
-            <SubmitButton />
-            <p>Don't have any account? <NavLink to={"/register"}>register</NavLink></p>
-
-        </form>
 
     )
 }

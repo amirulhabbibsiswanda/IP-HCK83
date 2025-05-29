@@ -10,12 +10,12 @@ export default function Navbar() {
     }
 
     return (
-        <div>
-            <a onClick={() => { navigate("/") }} className="btn btn-primary" >Heroes</a>
-            <a onClick={() => { navigate("/users/favourites") }} className="btn btn-primary">My Favourite Heroes</a>
-            <a onClick={() => { navigate("/recommendations") }} className="btn btn-primary">Hero Recommendations</a>
-            <a onClick={() => { navigate(-1) }} className="btn btn-primary">Back</a>
-            <a onClick={logout} className="btn btn-primary">Logout</a>
+        <div className="bg-dark py-2 px-3 d-flex gap-2">
+            <a onClick={() => { navigate("/") }} className="btn btn-outline-light" >Heroes</a>
+            <a onClick={() => { navigate("/users/favourites") }} className="btn btn-outline-light">My Favourite Heroes</a>
+            <a onClick={() => { navigate("/recommendations") }} className="btn btn-outline-light">Hero Recommendations</a>
+            <a onClick={() => { navigate(-1) }} className="btn btn-outline-light">Back</a>
+            <a onClick={logout} className="btn btn-outline-light">Logout</a>
 
         </div>
 

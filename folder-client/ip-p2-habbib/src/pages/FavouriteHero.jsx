@@ -43,7 +43,7 @@ export default function FavouriteHero() {
 
 
     return (
-        <div>
+        <div className="container d-flex gap-3">
             {
                 heroes.map((hero) => {
                     return (

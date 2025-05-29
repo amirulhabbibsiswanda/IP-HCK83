@@ -1,0 +1,62 @@
+body {
+    background-color: #06142e;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-control,
+.btn,
+.card,
+.list-group-item {
+    border-radius: 0.75rem;
+}
+
+.card {
+    background-color: #0f1c3f;
+    color: #ffffff;
+    border: none;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #cfd8dc;
+}
+
+.btn-primary {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
+.form-group label {
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+input.form-control {
+    background-color: #0f172a;
+    color: #ffffff;
+    border: 1px solid #334155;
+}
+
+input.form-control::placeholder {
+    color: #64748b;
+}
+
+a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
