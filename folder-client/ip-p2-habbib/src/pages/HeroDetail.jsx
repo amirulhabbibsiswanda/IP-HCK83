@@ -35,6 +35,7 @@ export default function HeroDetail() {
             <Card hero={hero} />
             <p>{hero.specially}</p>
             <button onClick={() => { navigate(`/heroes/edit/${hero.id}`) }}>edit detail hero </button>
+            <button onClick={() => { navigate(`/image/upload/${hero.id}`) }}>change image </button>
         </div>
     )
 }

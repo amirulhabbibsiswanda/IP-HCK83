@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axiosInstance from "../lib/http"
 import { useNavigate, useParams } from "react-router"
 import SubmitButton from "../components/SubmitButton"
+
 
 export default function HeroEdit() {
     const heroId = useParams().id
@@ -15,6 +16,35 @@ export default function HeroEdit() {
     const [offence, setOffence] = useState(0)
     const [ability, setAbility] = useState(0)
     const [difficulty, setDifficulty] = useState(0)
+
+    async function getHeroDetail(heroId) {
+        try {
+            const { data } = await axiosInstance.get(`/heroes/${heroId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                    }
+                }
+            )
+            // console.log(data);
+            setName(data.name)
+            setImageUrl(data.imageUrl)
+            setRole(data.role)
+            setSpecially(data.specially)
+            setDurability(data.durability)
+            setOffence(data.offence)
+            setAbility(data.ability)
+            setDifficulty(data.difficulty)
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+    useEffect(() => {
+        getHeroDetail(heroId)
+    }, [heroId])
 
     async function submitEdit(e) {
         e.preventDefault()
@@ -55,11 +85,11 @@ export default function HeroEdit() {
                     <input
                         value={imageUrl}
                         onChange={(e) => { setImageUrl(e.target.value) }}
-                        type="email"
+                        type="text"
                         className="form-control"
                         id=""
-                        aria-describedby="emailHelp"
-                        placeholder="Enter email"
+                        aria-describedby=""
+                        placeholder=""
                     />
                 </div>
                 <div className="form-group">
@@ -67,7 +97,7 @@ export default function HeroEdit() {
                     <input
                         value={role}
                         onChange={(e) => { setRole(e.target.value) }}
-                        type="password"
+                        type="text"
                         className="form-control"
                         id=""
                         placeholder=""
