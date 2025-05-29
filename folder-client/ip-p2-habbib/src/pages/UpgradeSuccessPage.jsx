@@ -26,7 +26,7 @@ export default function UpgradeSuccessPage() {
         })
             .then(res => res.json())
             .then(data => {
-                alert(`Status berhasil di-upgrade menjadi admin`);
+                // alert(`Status berhasil di-upgrade menjadi admin`);
                 navigate('/', { replace: true }); // Gunakan navigate dengan replace
             })
             .catch(err => {
