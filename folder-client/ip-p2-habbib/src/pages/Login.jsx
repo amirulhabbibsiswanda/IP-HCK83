@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/features/authSlice";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -29,9 +30,9 @@ export default function Login() {
                                     <h2 className="fw-bold text-info mb-2">Welcome Back</h2>
                                     <p className="text-light-emphasis">Sign in to continue to Hero Collection</p>
                                 </div>
-                                
+
                                 {error && <div className="alert alert-danger">{error}</div>}
-                                
+
                                 <form onSubmit={handleSubmit}>
                                     <div className="mb-4">
                                         <label htmlFor="email" className="form-label text-light">Email Address</label>
@@ -75,6 +76,9 @@ export default function Login() {
                                 </form>
                                 <div className="text-center">
                                     <p className="text-light-emphasis">Don't have an account? <a onClick={() => navigate("/register")} className="text-info fw-bold">Register</a></p>
+                                </div>
+                                <div>
+                                    <GoogleLoginButton />
                                 </div>
                             </div>
                         </div>
