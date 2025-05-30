@@ -151,8 +151,8 @@ class UserController {
                     },
                 ],
                 mode: 'payment',
-                success_url: `http://localhost:5173/upgrade-success?session_id={CHECKOUT_SESSION_ID}`,
-                cancel_url: `http://localhost:5173/`,
+                success_url: `https://ip-p2-habbib.web.app/upgrade-success?session_id={CHECKOUT_SESSION_ID}`,
+                cancel_url: `https://ip-p2-habbib.web.app/`,
             });
 
             res.status(200).json({ url: session.url });
