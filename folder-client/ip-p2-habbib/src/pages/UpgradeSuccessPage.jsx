@@ -17,7 +17,7 @@ export default function UpgradeSuccessPage() {
         // Simpan token ke variabel untuk digunakan jika terjadi error
         const token = localStorage.getItem("access_token");
 
-        fetch(`https://ip-p2-habbib.web.app/users/upgrade-success?session_id=${sessionId}`, {
+        fetch(`https://hck.duniahabbib.site/users/upgrade-success?session_id=${sessionId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
