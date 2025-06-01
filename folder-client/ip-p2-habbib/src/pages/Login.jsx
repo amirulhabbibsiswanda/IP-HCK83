@@ -77,7 +77,7 @@ export default function Login() {
                                 <div className="text-center">
                                     <p className="text-light-emphasis">Don't have an account? <a onClick={() => navigate("/register")} className="text-info fw-bold">Register</a></p>
                                 </div>
-                                <div>
+                                <div className="d-flex justify-content-center mt-3">
                                     <GoogleLoginButton />
                                 </div>
                             </div>
